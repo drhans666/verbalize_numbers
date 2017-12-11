@@ -11,7 +11,7 @@ from generator.forms import Number
 
 def int_to_str(number):
     rb = RuleBasedNumberFormat(URBNFRuleSetTag.SPELLOUT, Locale('pl_PL'))
-    verbalized = rb.format(int(number)).capitalize()
+    verbalized = rb.format(int(number))
     return verbalized
 
 

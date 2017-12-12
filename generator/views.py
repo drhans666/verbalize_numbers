@@ -5,6 +5,11 @@ from generator.forms import NumberForm
 
 
 def int_to_str(number):
+    """
+    function takes an integer and returns it verbalized form
+    :param number: integer 
+    :return: string
+    """
     if number == 0:
         return 'zero'
     else:

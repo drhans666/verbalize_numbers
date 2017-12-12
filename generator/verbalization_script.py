@@ -2,6 +2,11 @@ import math
 
 
 def first_three(three):
+    """
+    function
+    :param three: integer that 
+    :return: 
+    """
     ones = ['', 'jeden', 'dwa', 'trzy', 'cztery', 'pięć', 'sześć', 'siedem',
             'osiem', 'dziewięć']
     tens = ['dziesięć', 'jedenaście', 'dwanaście', 'trzynaście',
@@ -28,10 +33,17 @@ def first_three(three):
 
 
 def stack_threes(number):
+    """
+    Function takes a number and return's it as a list of three-char strings
+    :param number: integer 
+    :return: list
+    """
+    # ensures number is natural and turns it into string
     str_number = str(abs(number))
+    # check how many trio's in number
     threes_number = int(math.ceil(len(str_number) / 3))
     threes_list = []
-
+    # loop divides integers into trio's and passes them to list
     for i in range(threes_number):
         threes_list.append(str_number[-3:])
         str_number = str_number[:-3]
@@ -62,8 +74,14 @@ def big_validator(count, three_num):
 
 
 def verbalize_number(three_list):
+    """
+
+    :param three_list: list with 3-char strings representing base number 
+    :return: not validated as positive/negative verbalized number string
+    """
     count = -1
     verbalized = []
+    
     for three_num in three_list:
         if count >= 0:
             verbalized.append(big_validator(count, int(three_num)))

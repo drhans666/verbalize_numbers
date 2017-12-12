@@ -91,3 +91,11 @@ class MainTest(TestCase):
         for number, verbal in data:
             result = int_to_str(number)
             self.assertEqual(result, verbal)
+
+    def test_negative(self):
+        verbalized = ['minus dziesięć', 'minus sto pięćdziesiąt sześć', 'minus siedem tysięcy']
+        numbers = [-10, -156, -7000]
+        data = zip(numbers, verbalized)
+        for number, verbal in data:
+            result = int_to_str(number)
+            self.assertEqual(result, verbal)

@@ -5,15 +5,15 @@
     <title>Spelled number generator</title>
 </head>
 <body>
+    <p>Wpisz liczbę całkowitą, aby otrzymać jej werbalizację</p>
     <form action="{% url 'generator:main' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}
-        <input type="submit" value="Submit" style="color:black" />
+        <input type="submit" value="Zatwierdź" style="color:black" />
     </form>
     {% if verbalized %}
     <p>Twoja liczba słownie:</p>
     {{ verbalized }}
     {% endif %}
-
 </body>
 </html>

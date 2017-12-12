@@ -8,8 +8,7 @@ class MainTest(TestCase):
     def test_digits(self):
         verbalized = ['zero', 'jeden', 'dwa', 'trzy', 'cztery', 'pięć', 'sześć', 'siedem',
                       'osiem', 'dziewięć']
-        numbers = range(0, 9)
-        data = zip(numbers, verbalized)
+        data = enumerate(verbalized)
         for number, verbal in data:
             result = int_to_str(number)
             self.assertEqual(result, verbal)

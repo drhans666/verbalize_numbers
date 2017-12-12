@@ -1,5 +1,5 @@
 Hard Approach to exercise.
 -
-Manually written int->str processor in verbalization_process
+Manually written int->str processor in generator/verbalization_process.py
 
-python manage.py test to run tests
+python manage.py test ---> to run tests

@@ -1,22 +1,22 @@
 from django.shortcuts import render
 
-from generator.verbalization_script import *
+from generator.verbalization_process import *
 from generator.forms import NumberForm
 
 
 def int_to_str(number):
     """
     function takes an integer and returns it verbalized form
-    :param number: integer 
-    :return: string
+    :param number: int 
+    :return: str
     """
+    # validates edge case when number is 0
     if number == 0:
         return 'zero'
-    else:
-        three_list = stack_threes(number)
-        verbalized = verbalize_number(three_list)
-        verbalized = check_minus(number, verbalized)
-        return verbalized
+    three_list = stack_threes(number)
+    verbalized = verbalize_number(three_list)
+    verbalized = check_minus(number, verbalized)
+    return verbalized
 
 
 def main(request):

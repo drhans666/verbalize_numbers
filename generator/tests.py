@@ -8,8 +8,8 @@ class MainTest(TestCase):
     def test_digits(self):
         verbalized = ['zero', 'jeden', 'dwa', 'trzy', 'cztery', 'pięć', 'sześć', 'siedem',
                       'osiem', 'dziewięć']
-        numbers = range(0, 9)
-        data = zip(numbers, verbalized)
+
+        data = enumerate(verbalized)
         for number, verbal in data:
             result = int_to_str(number)
             self.assertEqual(result, verbal)
@@ -87,6 +87,14 @@ class MainTest(TestCase):
                       'dwanaście bilionów dziesięć miliardów trzysta tysięcy dwieście pięćdziesiąt sześć']
 
         numbers = [1002320300500, 4003830000050, 12010000300256]
+        data = zip(numbers, verbalized)
+        for number, verbal in data:
+            result = int_to_str(number)
+            self.assertEqual(result, verbal)
+
+    def test_big_round(self):
+        verbalized = ['milion', 'sto milionów', 'dziesięć miliardów', 'sto bilionów']
+        numbers = [1000000, 100000000, 10000000000, 100000000000000]
         data = zip(numbers, verbalized)
         for number, verbal in data:
             result = int_to_str(number)

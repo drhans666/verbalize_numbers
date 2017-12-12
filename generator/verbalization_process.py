@@ -3,9 +3,9 @@ import math
 
 def first_three(three):
     """
-    function
-    :param three: integer that 
-    :return: 
+    Gets trio like 345 or 674, processes, cleans and returns verbalized form
+    :param three: int
+    :return: str
     """
     ones = ['', 'jeden', 'dwa', 'trzy', 'cztery', 'pięć', 'sześć', 'siedem',
             'osiem', 'dziewięć']
@@ -17,9 +17,12 @@ def first_three(three):
     hundreds = ['', 'sto', 'dwieście', 'trzysta', 'czterysta', 'pięćset', 'sześćset',
                 'siedemset', 'osiemset', 'dziewięćset']
 
+    # assigns index nr to verbalized form in list
     on = int(three % 10)
     ent = int(three / 10 % 10)
     hun = int(three / 100 % 10)
+
+    # appends result list with verbal. forms.
     result = []
     result.append(hundreds[hun])
     if int(ent) == 1:
@@ -27,6 +30,7 @@ def first_three(three):
     else:
         result.append(enties[ent])
         result.append(ones[on])
+    # cleans result list from empty strings
     while '' in result:
         result.remove('')
     return ' '.join(result)
@@ -50,18 +54,27 @@ def stack_threes(number):
     return threes_list
 
 
-def big_validator(count, three_num):
+def big_validator(trio_num, trio_content):
+    """
+    Validates and assigns in right form values like million, thousand etc.
+    :param trio_num: int
+    :param trio_content: int 
+    :return: string
+    """
+    
     thousands = ['tysiąc', 'tysiące', 'tysięcy', '']
     millions = ['milion', 'miliony', 'milionów', '']
     milliards = ['miliard', 'miliardy', 'miliardów', '']
     billions = ['bilion', 'biliony', 'bilionów', '']
     big_numbers = [thousands, millions, milliards, billions]
-    ones = int(three_num % 10)
-    tens = int(three_num / 10 % 10)
+    ones = int(trio_content % 10)
+    tens = int(trio_content / 10 % 10)
 
-    if three_num == 000:
+    # takes care of edge case. Prevents putting 'big_numbers' f.e. 'tysiąc' in 1000000
+    if trio_content == 000:
         grammar_form = 3
-    elif three_num == 1:
+    # assigns correct grammar form
+    elif trio_content == 1:
         grammar_form = 0
     elif tens == 1 and ones > 1:
         grammar_form = 2
@@ -70,35 +83,45 @@ def big_validator(count, three_num):
     else:
         grammar_form = 2
 
-    return big_numbers[count][grammar_form]
+    return big_numbers[trio_num][grammar_form]
 
 
 def verbalize_number(three_list):
     """
-
-    :param three_list: list with 3-char strings representing base number 
-    :return: not validated as positive/negative verbalized number string
+    Function takes list with 3-char strings representing base number
+    It returns string with verbalized number without positive/negative 
+    :param three_list: list 
+    :return: str
     """
-    count = -1
+    # is used as a trio counter. f.e. 1 trio is 0-999, 2 thousands, 3 millions etc.
+    trio_nr = -1
     verbalized = []
-    
-    for three_num in three_list:
-        if count >= 0:
-            verbalized.append(big_validator(count, int(three_num)))
+
+    for trio_content in three_list:
+        if trio_nr >= 0:
+            verbalized.append(big_validator(trio_nr, int(trio_content)))
+        # takes care of edge case
         try:
             if verbalized[-1] not in ['tysiąc', 'milion', 'miliard', 'bilion']:
-                verbalized.append(first_three(int(three_num)))
+                verbalized.append(first_three(int(trio_content)))
         except IndexError:
-            verbalized.append(first_three(int(three_num)))
-        count += 1
+            verbalized.append(first_three(int(trio_content)))
+        trio_nr += 1
+    # makes mirror reflection of list
     verbalized = verbalized[::-1]
+    # cleans of empty strings
     while '' in verbalized:
         verbalized.remove('')
     return (' '.join(verbalized)).strip()
 
 
 def check_minus(number, verbalized):
+    """
+    Checks if base number is negative. If yes adds 'minus' phrase.
+    :param number: 
+    :param verbalized: 
+    :return: 
+    """
     if number < 0:
         verbalized = 'minus ' + verbalized
     return verbalized
-

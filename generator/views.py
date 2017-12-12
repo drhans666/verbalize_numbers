@@ -1,12 +1,7 @@
 from django.shortcuts import render
-<<<<<<< Updated upstream
 
 from PyICU import *
 
-=======
-
-from generator.verbalization_script import *
->>>>>>> Stashed changes
 from generator.forms import NumberForm
 
 

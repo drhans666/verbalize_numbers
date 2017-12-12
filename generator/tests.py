@@ -91,6 +91,14 @@ class MainTest(TestCase):
             result = int_to_str(number)
             self.assertEqual(result, verbal)
 
+    def test_big_round(self):
+        verbalized = ['milion', 'sto milionów', 'dziesięć miliardów', 'sto bilionów']
+        numbers = [1000000, 100000000, 10000000000, 100000000000000]
+        data = zip(numbers, verbalized)
+        for number, verbal in data:
+            result = int_to_str(number)
+            self.assertEqual(result, verbal)
+
     def test_negative(self):
         verbalized = ['minus dziesięć', 'minus sto pięćdziesiąt sześć', 'minus siedem tysięcy']
         numbers = [-10, -156, -7000]

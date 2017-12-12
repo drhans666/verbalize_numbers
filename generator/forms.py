@@ -1,5 +1,5 @@
 from django import forms
 
 
-class Number(forms.Form):
-    number = forms.IntegerField(label='Wpisz liczbę całkowitą', required=True)
+class NumberForm(forms.Form):
+    number = forms.IntegerField(label='Number', required=True)

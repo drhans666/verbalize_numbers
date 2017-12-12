@@ -5,6 +5,7 @@
     <title>Spelled number generator</title>
 </head>
 <body>
+    <p>Wpisz liczbę całkowitą, aby otrzymać jej werbalizację</p>
     <form action="{% url 'generator:main' %}" method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form }}

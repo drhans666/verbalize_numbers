@@ -1,5 +1,4 @@
 import math
-number = -503
 
 
 def first_three(three):
@@ -23,7 +22,8 @@ def first_three(three):
     else:
         result.append(enties[ent])
         result.append(ones[on])
-    result.remove('')
+    while '' in result:
+        result.remove('')
     return ' '.join(result)
 
 
@@ -34,20 +34,22 @@ def stack_threes(number):
 
     for i in range(threes_number):
         threes_list.append(str_number[-3:])
-        str_number = str_number.replace(str_number[-3:], '')
+        str_number = str_number[:-3]
     return threes_list
 
 
 def big_validator(count, three_num):
-    thousands = ['tysiąc', 'tysiące', 'tysięcy']
-    millions = ['milion', 'miliony', 'milionów']
-    milliards = ['miliard', 'miliardy', 'miliardów']
-    billions = ['bilion', 'biliony', 'bilionów']
+    thousands = ['tysiąc', 'tysiące', 'tysięcy', '']
+    millions = ['milion', 'miliony', 'milionów', '']
+    milliards = ['miliard', 'miliardy', 'miliardów', '']
+    billions = ['bilion', 'biliony', 'bilionów', '']
     big_numbers = [thousands, millions, milliards, billions]
     ones = int(three_num % 10)
     tens = int(three_num / 10 % 10)
 
-    if three_num == 1:
+    if three_num == 000:
+        grammar_form = 3
+    elif three_num == 1:
         grammar_form = 0
     elif tens == 1 and ones > 1:
         grammar_form = 2
@@ -60,14 +62,20 @@ def big_validator(count, three_num):
 
 
 def verbalize_number(three_list):
-    count = 0
+    count = -1
     verbalized = []
     for three_num in three_list:
-        if count != 0:
+        if count >= 0:
             verbalized.append(big_validator(count, int(three_num)))
-        verbalized.append(first_three(int(three_num)))
+        try:
+            if verbalized[-1] not in ['tysiąc', 'milion', 'miliard', 'bilion']:
+                verbalized.append(first_three(int(three_num)))
+        except IndexError:
+            verbalized.append(first_three(int(three_num)))
         count += 1
     verbalized = verbalized[::-1]
+    while '' in verbalized:
+        verbalized.remove('')
     return (' '.join(verbalized)).strip()
 
 
@@ -75,9 +83,4 @@ def check_minus(number, verbalized):
     if number < 0:
         verbalized = 'minus ' + verbalized
     return verbalized
-
-
-three_list = stack_threes(number)
-verbalized = verbalize_number(three_list)
-print(check_minus(number, verbalized))
 

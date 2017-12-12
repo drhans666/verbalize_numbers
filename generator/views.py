@@ -6,12 +6,14 @@ from django.urls import reverse
 
 from PyICU import *
 
+from generator.verbalization_script import *
 from generator.forms import Number
 
 
 def int_to_str(number):
-    rb = RuleBasedNumberFormat(URBNFRuleSetTag.SPELLOUT, Locale('pl_PL'))
-    verbalized = rb.format(int(number))
+    three_list = stack_threes(number)
+    verbalized = verbalize_number(three_list)
+    verbalized = check_minus(number, verbalized)
     return verbalized
 
 
